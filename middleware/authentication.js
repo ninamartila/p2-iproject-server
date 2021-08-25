@@ -4,7 +4,7 @@ const authentication = (req, res, next) => {
     const { access_token } = req.headers;
     if (access_token) {
         const payload = verifyToken(access_token);
-        req.user = { id: payload.id, email: payload.email };
+        req.users = { id: payload.id, email: payload.email };
         if (payload.id) {
             next()
         } else {

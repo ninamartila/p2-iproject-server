@@ -21,9 +21,12 @@ class ControllerProfile {
             const findProfile = await Profile.findByPk(id)
 
             if (findProfile) {
-                const result = await Profile.updated({ fullName, phoneNumber, address, imageProfile, gender })
+                const result = await Profile.update(
+                    { fullName, phoneNumber, address, imageProfile, gender },
+                    { where: { id }, returning: true }
+                )
 
-                res.status(200).json(result)
+                res.status(200).json(result[1][0])
             } else {
                 throw ({ name: 'NotFound', type: 'Profile' })
             }

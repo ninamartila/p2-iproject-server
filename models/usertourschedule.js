@@ -11,11 +11,17 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      UserTourSchedule.belongsTo(models.User)
-      UserTourSchedule.belongsTo(models.TourSchedule)
+      UserTourSchedule.belongsTo(models.User, { foreignKey: 'UserId' })
+      UserTourSchedule.belongsTo(models.TourSchedule, { foreignKey: 'TourScheduleId' })
     }
   };
   UserTourSchedule.init({
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true
+    },
     UserId: DataTypes.INTEGER,
     TourScheduleId: DataTypes.INTEGER,
     role: {

@@ -5,11 +5,7 @@ class ControllerUser {
         const id = Number(req.users.id)
 
         try {
-            const result = await User.findAll({
-                attributes: {
-                    exclude: [{ id }]
-                }
-            })
+            const result = await User.findAll()
 
             res.status(200).json(result)
         } catch (error) {

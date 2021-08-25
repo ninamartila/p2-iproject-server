@@ -7,8 +7,8 @@ class ControllerAuth {
         const { username, email, password } = req.body
 
         try {
-            await Profile.create({ fullName: '', phoneNumber: '', address: '', imageProfile: '', gender: '' })
-            const result = await User.create({ username, email, password })
+            const dataProfile = await Profile.create({ fullName: '', phoneNumber: '', address: '', imageProfile: '', gender: '' })
+            const result = await User.create({ username, email, password, ProfileId: Number(dataProfile.id) })
             const data = {
                 id: result.id,
                 username: result.username,
