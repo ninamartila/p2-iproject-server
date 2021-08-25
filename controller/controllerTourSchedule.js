@@ -1,4 +1,4 @@
-const { TourSchedule, UserTourSchedule } = require('../models');
+const { TourSchedule, UserTourSchedule, User } = require('../models');
 const axios = require('axios');
 const base64encode = require('../helper/base64encode');
 
@@ -18,21 +18,20 @@ class ControllerTourSchedule {
         const key = process.env.TOKEN_GOOGLE_PLACE
 
         try {
-            const result = await TourSchedule.findByPk(TourScheduleId)
-            const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${result.placeId}&language=id&region=id&key=${key}`)
-            const photos = []
-            const maxIndex = response.data.result.photos.length > 3 ? 3 : response.data.result.photos.length
-            console.log(response.data.result.photos[0].getUrl());
-            for (let index = 0; index < maxIndex; index++) {
-                console.log(response.data)
-                const element = response.data.result.photos[index];
-                const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${element.photo_reference}&maxwidth=256&key=${key}`)
-                const base64 = base64encode(photoResponse.data)
+            const result = await TourSchedule.findByPk(TourScheduleId, { include: User })
+            // const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${result.placeId}&language=id&region=id&key=${key}`)
+            // const photos = []
+            // const maxIndex = response.data.result.photos.length > 3 ? 3 : response.data.result.photos.length
+            // console.log(response.data.result.photos[0].getUrl());
+            // for (let index = 0; index < maxIndex; index++) {
+            //     console.log(response.data)
+            //     const element = response.data.result.photos[index];
+            //     const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${element.photo_reference}&maxwidth=256&key=${key}`)
+            //     const base64 = base64encode(photoResponse.data)
 
-                photos.push(base64)
-            }
-
-            res.status(200).json({ result, photos })
+            //     photos.push(base64)
+            // }
+            res.status(200).json(result)
         } catch (error) {
             console.log({ error })
             next(error)
@@ -43,12 +42,16 @@ class ControllerTourSchedule {
         const UserId = Number(req.users.id)
 
         try {
-            const result = await TourSchedule.findAll({
-                where: { UserId }
+            const result = await User.findOne({
+                include: TourSchedule,
+                where: {
+                    id: UserId
+                }
             })
 
-            res.status(200).json(result)
+            res.status(200).json(result.TourSchedules)
         } catch (error) {
+            console.log(error);
             next(error)
         }
     }
