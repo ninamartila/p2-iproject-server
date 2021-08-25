@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/ninamartila/p2-iproject-server#readme",
   "dependencies": {
+    "@googlemaps/google-maps-services-js": "^3.1.16",
     "axios": "^0.21.1",
     "bcrypt": "^5.0.1",
     "cors": "^2.8.5",
@@ -29,6 +30,7 @@
     "form-data": "^4.0.0",
     "jsonwebtoken": "^8.5.1",
     "multer": "^1.4.3",
+    "nodemailer": "^6.6.3",
     "nodemon": "^2.0.12",
     "pg": "^8.7.1",
     "sequelize": "^6.6.5",

@@ -1,7 +1,6 @@
-const ControllerPlace = require('../controller/controllerPlace');
-const routerPlace = require('express').Router();
+const ControllerPlace = require("../controller/controllerPlace");
+const routerPlace = require("express").Router();
 
-routerPlace.get('/', ControllerPlace.place)
-routerPlace.get('/:id', ControllerPlace.placeDetail)
+routerPlace.get("/", ControllerPlace.place);
 
-module.exports = routerPlace
+module.exports = routerPlace;

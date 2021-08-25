@@ -1,41 +1,37 @@
-const axios = require('axios');
-const base64encode = require('../helper/base64encode');
+const { Client } = require("@googlemaps/google-maps-services-js");
+
+const gClient = new Client({});
+
 class ControllerPlace {
-    static async place(req, res, next) {
-        const { query } = req.query
-        const key = process.env.TOKEN_GOOGLE_PLACE
+  static async place(req, res, next) {
+    const { query } = req.query;
+    const key = process.env.TOKEN_GOOGLE_PLACE;
 
-        try {
-            const response = await axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${query}&key=${key}`)
+    try {
+      const response = await gClient.textSearch({
+        params: {
+          key,
+          query,
+          region: "id",
+          language: "id",
+        },
+      });
 
-            res.status(200).json(response.data.results)
-        } catch (error) {
-            next(error)
-        }
+      const result = response.data.results.map((item) => ({
+        placeId: item.place_id,
+        name: item.name,
+        location: item.geometry.location,
+        address: item.formatted_address,
+        rating: item.rating,
+        photos: item.photos,
+        ratingTotal: item.user_ratings_total,
+      }));
+
+      res.status(200).json(result);
+    } catch (error) {
+      next(error);
     }
-
-    static async placeDetail(req, res, next) {
-        const { id } = req.params
-        const key = process.env.TOKEN_GOOGLE_PLACE
-
-        try {
-            const response = await axios.get(`https://maps.googleapis.com/maps/api/place/details/json?place_id=${id}&language=id&region=id&key=${key}`)
-            const photos = []
-            const maxIndex = response.data.result.photos.length > 3 ? 3 : response.data.result.photos.length
-            console.log(response.data.result.photos.getUrl());
-            for (let index = 0; index < maxIndex; index++) {
-                const element = response.data.result.photos[index];
-                const photoResponse = await axios.get(`https://maps.googleapis.com/maps/api/place/photo?photo_reference=${element.photo_reference}&maxwidth=256&key=${key}`)
-                const base64 = base64encode(photoResponse.data)
-
-                photos.push(base64)
-            }
-
-            res.status(200).json({ result: response.data.result, photos })
-        } catch (error) {
-            next(error)
-        }
-    }
+  }
 }
 
-module.exports = ControllerPlace
+module.exports = ControllerPlace;
