@@ -52,7 +52,6 @@ module.exports = {
         type: Sequelize.STRING,
       },
       placeRating: {
-        allowNull: false,
         type: Sequelize.FLOAT,
       },
       name: {

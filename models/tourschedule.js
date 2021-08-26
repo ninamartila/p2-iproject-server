@@ -98,12 +98,7 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       placeRating: {
-        allowNull: false,
         type: DataTypes.FLOAT,
-        validate: {
-          notEmpty: { msg: "Place Rating is Required" },
-          notNull: { msg: "Place Rating is Required" },
-        },
       },
       placePhoto: {
         type: DataTypes.STRING,
