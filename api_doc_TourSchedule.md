@@ -1,6 +1,6 @@
 # Jobstreet App Server
 
-Jobstreet App is an application to job seeker. This app has :
+Tour Schedule App is an application to Tour Scheduling. This app has :
 
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
@@ -9,16 +9,14 @@ Jobstreet App is an application to job seeker. This app has :
 
 ## RESTful endpoints
 
-### GET /jobs
+### GET /tourSchedules/public
 
 > Job Get All
 
 _Request Header_
 
 ```
-{
-    "access_token": <access_token>
-}
+not needed
 ```
 
 _Request Body_
@@ -31,45 +29,56 @@ _Response (200 Ok)_
 
 ```
 [
-    "id": 5,
-        "title": "test1",
-        "description": "test1",
-        "jobType": "test1",
-        "imageJob": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim4_RKhIw2TLE.jpg",
-        "createdAt": "2021-08-05T12:25:37.315Z",
-        "updatedAt": "2021-08-05T12:25:37.315Z",
-        "CompanyId": 2,
-        "UserId": 1,
-        "Company": {
-            "id": 2,
-            "name": "test2",
-            "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/53627e03-47b1-44e6-88be-f472db198074_MAWPhxeRwWy.jpg",
-            "location": "test2",
-            "email": "test2@gmail.com",
-            "description": "test2",
-            "createdAt": "2021-08-05T12:21:47.557Z",
-            "updatedAt": "2021-08-05T12:21:47.557Z"
+    {
+        "id": 1,
+        "planDate": "2022-06-25T00:00:00.000Z",
+        "endDate": "2022-06-30T00:00:00.000Z",
+        "memberSlot": 20,
+        "placeId": "ChIJPVOsXpcAey4RNi7iUxT-GzU",
+        "isPublic": true,
+        "description": "bla bla bla",
+        "price": 100000,
+        "status": "plan",
+        "placeName": "Pantai Parangtritis",
+        "placeAddress": "Pantai Parangtritis, Daerah Istimewa Yogyakarta",
+        "placeRating": 4.5,
+        "name": "Tour with friend",
+        "createdAt": "2021-08-25T11:07:56.975Z",
+        "updatedAt": "2021-08-25T11:07:56.975Z",
+        "UserTourSchedule": {
+            "id": 1,
+            "UserId": 1,
+            "TourScheduleId": 1,
+            "role": "creator",
+            "status": "apply",
+            "createdAt": "2021-08-25T11:07:57.032Z",
+            "updatedAt": "2021-08-25T11:07:57.032Z"
         }
     },
     {
-        "id": 4,
-        "title": "test3",
-        "description": "test3",
-        "jobType": "test3",
-        "imageJob": "https://lh5.googleusercontent.com/-4TWjl4VRhb0/TXuYqcmYJMI/AAAAAAAAAEs/zOKfqbtAO10/s1600/baju+bodo1.jpg",
-        "createdAt": "2021-08-05T12:25:00.832Z",
-        "updatedAt": "2021-08-06T08:07:00.620Z",
-        "CompanyId": 1,
-        "UserId": 1,
-        "Company": {
-            "id": 1,
-            "name": "test1",
-            "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/53627e03-47b1-44e6-88be-f472db198074_6mC0FvJzZ6.jpg",
-            "location": "test1",
-            "email": "test1@gmail.com",
-            "description": "test1",
-            "createdAt": "2021-08-05T12:20:04.317Z",
-            "updatedAt": "2021-08-05T12:20:04.317Z"
+        "id": 2,
+        "planDate": "2022-06-25T00:00:00.000Z",
+        "endDate": "2022-06-30T00:00:00.000Z",
+        "memberSlot": 20,
+        "placeId": "ChIJPVOsXpcAey4RNi7iUxT-GzU",
+        "isPublic": true,
+        "description": "bla bla bla",
+        "price": 100000,
+        "status": "plan",
+        "placeName": "Pantai Parangtritis",
+        "placeAddress": "Pantai Parangtritis, Daerah Istimewa Yogyakarta",
+        "placeRating": 4.5,
+        "name": "Tour with family",
+        "createdAt": "2021-08-25T11:08:09.369Z",
+        "updatedAt": "2021-08-25T11:08:09.369Z",
+        "UserTourSchedule": {
+            "id": 2,
+            "UserId": 1,
+            "TourScheduleId": 2,
+            "role": "creator",
+            "status": "apply",
+            "createdAt": "2021-08-25T11:08:09.412Z",
+            "updatedAt": "2021-08-25T11:08:09.412Z"
         }
     },
     ...
@@ -77,26 +86,24 @@ _Response (200 Ok)_
 
 ```
 
-_Response (500 - Internet Server Error)_
+_Response (500 - Internal Server Error)_
 
 ```
 {
-  "message": "Internet Server Error"
+  "message": "Internal Server Error"
 }
 ```
 
 ---
 
-### GET /jobs/:id
+### GET /tourSchedules/public/:id
 
 > Job Get By Id
 
 _Request Header_
 
 ```
-{
-    "access_token": <access_token>
-}
+not needed
 ```
 
 _Request Param_
@@ -117,38 +124,45 @@ _Response (200 Ok)_
 
 ```
 {
-    "id": 5,
-    "title": "test1",
-    "description": "test1",
-    "jobType": "test1",
-    "imageJob": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim4_RKhIw2TLE.jpg",
-    "createdAt": "2021-08-05T12:25:37.315Z",
-    "updatedAt": "2021-08-05T12:25:37.315Z",
-    "CompanyId": 2,
-    "UserId": 1
+   "id": 2,
+    "planDate": "2022-06-25T00:00:00.000Z",
+    "endDate": "2022-06-30T00:00:00.000Z",
+    "memberSlot": 20,
+    "placeId": "ChIJPVOsXpcAey4RNi7iUxT-GzU",
+    "isPublic": true,
+    "description": "bla bla bla",
+    "price": 100000,
+    "status": "plan",
+    "placeName": "Pantai Parangtritis",
+    "placeAddress": "Pantai Parangtritis, Daerah Istimewa Yogyakarta",
+    "placeRating": 4.5,
+    "name": "Tour with family",
+    "createdAt": "2021-08-25T11:08:09.369Z",
+    "updatedAt": "2021-08-25T11:08:09.369Z",
+    "UserTourSchedule": {
+        "id": 2,
+        "UserId": 1,
+        "TourScheduleId": 2,
+        "role": "creator",
+        "status": "apply",
+        "createdAt": "2021-08-25T11:08:09.412Z",
+        "updatedAt": "2021-08-25T11:08:09.412Z"
+    }
 }
 
 ```
 
-_Response (404 - Not Found)_
+_Response (500 - Internal Server Error)_
 
 ```
 {
-    "message": "Job Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
+  "message": "Internal Server Error"
 }
 ```
 
 ---
 
-### POST /jobs/cerate
+### GET /tourSchedules/private
 
 > Create Data Job
 
@@ -163,55 +177,51 @@ _Request Header_
 _Request Body_
 
 ```
-{
-    "title": <title>,
-    "description": <description>,
-    "jobType": <jobType>,
-    "imageJob": <imageJob>
-    "UserId": <UserId>,
-    "CompanyId": <CompanyId>
-}
+not needed
 ```
 
 _Response (201 Ok)_
 
 ```
 {
-    "id": 17,
-    "title": "test100",
-    "description": "test100",
-    "jobType": "test100",
-    "UserId": 1,
-    "CompanyId": 1,
-    "imageJob": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim2_ce-hIdjA5w.jpg",
-    "updatedAt": "2021-08-08T02:24:07.012Z",
-    "createdAt": "2021-08-08T02:24:07.012Z"
+    "id": 2,
+    "planDate": "2022-06-25T00:00:00.000Z",
+    "endDate": "2022-06-30T00:00:00.000Z",
+    "memberSlot": 20,
+    "placeId": "ChIJPVOsXpcAey4RNi7iUxT-GzU",
+    "isPublic": true,
+    "description": "bla bla bla",
+    "price": 100000,
+    "status": "plan",
+    "placeName": "Pantai Parangtritis",
+    "placeAddress": "Pantai Parangtritis, Daerah Istimewa Yogyakarta",
+    "placeRating": 4.5,
+    "name": "Tour with family",
+    "createdAt": "2021-08-25T11:08:09.369Z",
+    "updatedAt": "2021-08-25T11:08:09.369Z",
+    "UserTourSchedule": {
+        "id": 2,
+        "UserId": 1,
+        "TourScheduleId": 2,
+        "role": "creator",
+        "status": "apply",
+        "createdAt": "2021-08-25T11:08:09.412Z",
+        "updatedAt": "2021-08-25T11:08:09.412Z"
+    }
 }
 ```
 
-_Response (400 - Bad Request)_
+_Response (500 - Internal Server Error)_
 
 ```
 {
-  "message": [
-        "Title is required",
-        "Job Type is required",
-        ...
-    ]
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
+  "message": "Internal Server Error"
 }
 ```
 
 ---
 
-### PUT /jobs/:id
+### POST /tourSchedules
 
 > Edit Data Job By Id
 
@@ -226,20 +236,25 @@ _Request Header_
 _Request Param_
 
 ```
-{
-    "id": <id>
-}
+not needed
 ```
 
 _Request Body_
 
 ```
 {
-    "title": <title>,
-    "description": <description>,
-    "jobType": <jobType>,
-    "UserId": <UserId>,
-    "CompanyId": <CompanyId>
+    "planDate": <planDate>,
+    "endDate": <endDate>,
+    "memberSlot": <memberSlot>,
+    "placeId": <placeId>,
+    "isPublic": "isPublic,
+    "description": <description>
+    "price": <price>,
+    "status": <status>,
+    "placeName": <placeName>,
+    "placeAddress": <placeAddress>,
+    "placeRating": <placeRating>,
+    "name": <name>,
 }
 ```
 
@@ -247,15 +262,21 @@ _Response (200 Ok)_
 
 ```
 {
-    "id": 17,
-    "title": "test100",
-    "description": "test100",
-    "jobType": "test100",
-    "UserId": 1,
-    "CompanyId": 1,
-    "imageJob": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim2_ce-hIdjA5w.jpg",
-    "updatedAt": "2021-08-08T02:24:07.012Z",
-    "createdAt": "2021-08-08T02:24:07.012Z"
+    "id": 2,
+    "planDate": "2022-06-25T00:00:00.000Z",
+    "endDate": "2022-06-30T00:00:00.000Z",
+    "memberSlot": 20,
+    "placeId": "ChIJPVOsXpcAey4RNi7iUxT-GzU",
+    "isPublic": true,
+    "description": "bla bla bla",
+    "price": 100000,
+    "status": "plan",
+    "placeName": "Pantai Parangtritis",
+    "placeAddress": "Pantai Parangtritis, Daerah Istimewa Yogyakarta",
+    "placeRating": 4.5,
+    "name": "Tour with family",
+    "createdAt": "2021-08-25T11:08:09.369Z",
+    "updatedAt": "2021-08-25T11:08:09.369Z",
 }
 ```
 
@@ -265,96 +286,16 @@ _Response (400 - Bad Request)_
 {
     "message": [
         "Description is required",
-        "Job Type is required",
+        "name is required",
         ...
     ]
 }
 ```
 
-_Response (403 - Forbidden)_
+_Response (500 - Internal Server Error)_
 
 ```
 {
-    "message": [
-        "U Dont Have Access",
-    ]
-}
-```
-
-_Response (404 - Not Found)_
-
-```
-{
-    "message": "Job Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
-}
-```
-
----
-
-### DELETE /jobs:id
-
-> Delete Data Job By Id
-
-_Request Header_
-
-```
-{
-    "access_token": <access_token>
-}
-```
-
-_Request Param_
-
-```
-{
-    "id": <id>
-}
-```
-
-_Request Body_
-
-```
-not needed
-```
-
-_Response (200 Ok)_
-
-```
-{
-    "message": "Job has been deleted"
-}
-```
-
-_Response (403 - Forbidden)_
-
-```
-{
-    "message": [
-        "U Dont Have Access",
-    ]
-}
-```
-
-_Response (404 - Not Found)_
-
-```
-{
-    "message": "Job Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
+  "message": "Internal Server Error"
 }
 ```

@@ -1,6 +1,6 @@
 # Jobstreet App Server
 
-Jobstreet App is an application to job seeker. This app has :
+Tour Schedule App is an application to Tour Scheduling. This app has :
 
 - RESTful endpoint for asset's CRUD operation
 - JSON formatted response
@@ -9,7 +9,7 @@ Jobstreet App is an application to job seeker. This app has :
 
 ## RESTful endpoints
 
-### GET /companies
+### GET /place
 
 > Company Get All
 
@@ -25,288 +25,57 @@ _Request Body_
 not needed
 ```
 
+_Request query_
+
+```
+"query": <query>
+```
+
 _Response (200 Ok)_
 
 ```
 [
     {
-        "id": 1,
-        "name": "test1",
-        "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/53627e03-47b1-44e6-88be-f472db198074_6mC0FvJzZ6.jpg",
-        "location": "test1",
-        "email": "test1@gmail.com",
-        "description": "test1",
-        "createdAt": "2021-08-05T12:20:04.317Z",
-        "updatedAt": "2021-08-05T12:20:04.317Z"
+        "placeId": "ChIJG07t-x3vaC4RhblB9cTnPCs",
+        "name": "Pantai Hawaii Belah Wetan",
+        "location": {
+            "lat": -6.9337009,
+            "lng": 107.4969958
+        },
+        "address": "hawaii belah wetan, Jl. Citapen - Ciraden No.2, Citapen, Kec. Cihampelas, Kabupaten Bandung Barat, Jawa Barat 40562",
+        "rating": 0,
+        "ratingTotal": 0
     },
     {
-        "id": 2,
-        "name": "test2",
-        "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/53627e03-47b1-44e6-88be-f472db198074_MAWPhxeRwWy.jpg",
-        "location": "test2",
-        "email": "test2@gmail.com",
-        "description": "test2",
-        "createdAt": "2021-08-05T12:21:47.557Z",
-        "updatedAt": "2021-08-05T12:21:47.557Z"
+        "placeId": "ChIJS7eS5tzvaC4RrZhdOCDVYOY",
+        "name": "Pantai",
+        "location": {
+            "lat": -7.0113432,
+            "lng": 107.5295899
+        },
+        "address": "Jl. Parung Serab No.9, Parungserab, Kec. Soreang, Bandung, Jawa Barat 40921",
+        "rating": 5,
+        "photos": [
+            {
+                "height": 996,
+                "html_attributions": [
+                    "<a href=\"https://maps.google.com/maps/contrib/112192225491553071145\">DONNY RAMDANI</a>"
+                ],
+                "photo_reference": "Aap_uEByoPUExY7A5Ibk_jCrPXEHJYVwizaCqJIbr1J0_ixXMR7gpWJV_wdPNINV_Rw_rUUIqq5TbNFlyH2kLILwyX4ex2S5FJVt5cEoNbSLl6fw3SdQy155v-5POuD56AQTLIVouT88cssAylv7yZCUgJDT7nATmUm8KQ8lHvY43sk0YX4",
+                "width": 797
+            }
+        ],
+        "ratingTotal": 2
     },
     ...
 ]
 
 ```
 
-_Response (500 - Internet Server Error)_
+_Response (500 - Internal Server Error)_
 
 ```
 {
-  "message": "Internet Server Error"
-}
-```
-
----
-
-### GET /companies/:id
-
-> Company Get By Id
-
-_Request Header_
-
-```
-{
-    "access_token": <access_token>
-}
-```
-
-_Request Param_
-
-```
-{
-    "id": <id>
-}
-```
-
-_Request Body_
-
-```
-not needed
-```
-
-_Response (200 Ok)_
-
-```
-{
-    "id": 1,
-    "name": "test1",
-    "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/53627e03-47b1-44e6-88be-f472db198074_6mC0FvJzZ6.jpg",
-    "location": "test1",
-    "email": "test1@gmail.com",
-    "description": "test1",
-    "createdAt": "2021-08-05T12:20:04.317Z",
-    "updatedAt": "2021-08-05T12:20:04.317Z"
-}
-
-```
-
-_Response (404 - Not Found)_
-
-```
-{
-    "message": "Company Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
-}
-```
-
----
-
-### POST /companies/cerate
-
-> Create Data Companies
-
-_Request Header_
-
-```
-"access_token": <access_token>
-```
-
-_Request Body_
-
-```
-{
-    "name": <name>,
-    "companyLogo": <comapanyLogo>,
-    "location": <location>,
-    "email": <email>,
-    "description": <description>
-}
-```
-
-_Response (201 Ok)_
-
-```
-{
-    "id": 3,
-    "name": "test3",
-    "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim4_uHVjfLvaiC.jpg",
-    "location": "test3",
-    "email": "test3@gmail.com",
-    "description": "test3",
-    "updatedAt": "2021-08-08T01:43:22.428Z",
-    "createdAt": "2021-08-08T01:43:22.428Z"
-}
-```
-
-_Response (400 - Bad Request)_
-
-```
-{
-  "message": [
-        "Name is required",
-        "Company Logo is required",
-        ...
-    ]
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
-}
-```
-
----
-
-### PUT /comapanies/:id
-
-> Edit Data Companies By Id
-
-_Request Header_
-
-```
-{
-    "access_token": <access_token>
-}
-```
-
-_Request Param_
-
-```
-{
-    "id": <id>
-}
-```
-
-_Request Body_
-
-```
-{
-    "username": <username>,
-    "email": <email>,
-    "password": <password>,
-    "role": <role>,
-    "phoneNumber": <phoneNumber>,
-    "address": <address>
-}
-```
-
-_Response (200 Ok)_
-
-```
-{
-    "id": 3,
-    "name": "test3",
-    "companyLogo": "https://ik.imagekit.io/awwiz0ff3hm/baju_atasan_muslim4_uHVjfLvaiC.jpg",
-    "location": "test3",
-    "email": "test3@gmail.com",
-    "description": "test3",
-    "updatedAt": "2021-08-08T01:43:22.428Z",
-    "createdAt": "2021-08-08T01:43:22.428Z"
-}
-```
-
-_Response (400 - Bad Request)_
-
-```
-{
-    "message": [
-        "Name is required",
-        "Location is required",
-        ...
-    ]
-}
-```
-
-_Response (404 - Not Found)_
-
-```
-{
-    "message": "Company Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
-}
-```
-
----
-
-### DELETE /companies/:id
-
-> Delete Data Company By Id
-
-_Request Header_
-
-```
-{
-    "access_token": <access_token>
-}
-```
-
-_Request Param_
-
-```
-{
-    "id": <id>
-}
-```
-
-_Request Body_
-
-```
-not needed
-```
-
-_Response (200 Ok)_
-
-```
-{
-    "message": "Company has been deleted"
-}
-```
-
-_Response (404 - Not Found)_
-
-```
-{
-    "message": "Company Not Found"
-}
-```
-
-_Response (500 - Internet Server Error)_
-
-```
-{
-  "message": "Internet Server Error"
+  "message": "Internal Server Error"
 }
 ```
