@@ -107,11 +107,6 @@ module.exports = (sequelize, DataTypes) => {
       },
       placePhoto: {
         type: DataTypes.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: { msg: "Place Photo is Required" },
-          notNull: { msg: "Place Photo is Required" },
-        },
       },
       name: {
         allowNull: false,

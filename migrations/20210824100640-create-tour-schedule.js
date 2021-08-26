@@ -50,7 +50,6 @@ module.exports = {
       },
       placePhoto: {
         type: Sequelize.STRING,
-        allowNull: false,
       },
       placeRating: {
         allowNull: false,
